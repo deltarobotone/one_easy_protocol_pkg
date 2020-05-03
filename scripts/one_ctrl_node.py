@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from one_pkg.srv import *
+from one_easy_protocol_pkg.srv import *
 from easyprotocol import *
 import rospy
 
