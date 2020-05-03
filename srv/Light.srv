@@ -1,0 +1,15 @@
+#request constants
+uint8 OFF = 0
+uint8 RED = 1
+uint8 GREEN = 2
+uint8 BLUE = 3
+uint8 YELLOW = 4
+uint8 MAGENTA = 5
+uint8 CYAN = 6
+uint8 WHITE = 7
+#request fields
+uint8 light
+float32 intensity
+---
+#response fields
+string res
