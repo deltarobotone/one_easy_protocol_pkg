@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 
-from one_easy_protocol_pkg.srv import Move,MoveResponse,Light,LightResponse,ExtMotor,ExtMotorResponse,Gripper,GripperResponse,Connect,ConnectResponse,Disconnect,DisconnectResponse
+from one_easy_protocol_pkg.srv import *
 from easyprotocol import *
 import rospy
 
 class OneCtrlNode:
 
     def __init__(self):
-        self.__move_srv = rospy.Service('move', Move, self.__moveCB)
-        self.__light_srv = rospy.Service('light', Light, self.__lightCB)
-        self.__extmotor_srv = rospy.Service('extmotor', ExtMotor, self.__extmotorCB)
-        self.__gripper_srv = rospy.Service('gripper', Gripper, self.__gripperCB)
-        self.__connect_srv = rospy.Service('connect', Connect, self.__connectCB)
-        self.__disconnect_srv = rospy.Service('disconnect', Disconnect, self.__disconnectCB)
+        self.__move_srv = rospy.Service('move', RobotMove, self.__moveCB)
+        self.__light_srv = rospy.Service('light', RobotLight, self.__lightCB)
+        self.__extmotor_srv = rospy.Service('extmotor', RobotExtMotor, self.__extmotorCB)
+        self.__gripper_srv = rospy.Service('gripper', RobotGripper, self.__gripperCB)
+        self.__connect_srv = rospy.Service('connect', RobotConnect, self.__connectCB)
+        self.__disconnect_srv = rospy.Service('disconnect', RobotDisconnect, self.__disconnectCB)
         self.__connected = False
         self.__motorstate = False
         self.__robot = EasyProtocol()
@@ -24,22 +24,22 @@ class OneCtrlNode:
         self.__robot.findRobot()
         self.__robot.start()
         self.__connected = True
-        return ConnectResponse("connected")
+        return RobotConnectResponse("connected")
 
     #Disonnect
     def __disconnectCB(self,req):
         self.__robot.stop()
         self.__connected = False
-        return DisConnectResponse("disconnected")
+        return RobotDisConnectResponse("disconnected")
 
     #Move
     def __moveCB(self,req):
         if self.__connected == False:
-            return MoveResponse("failed")
+            return RobotMoveResponse("failed")
 
         self.__robot.move.ptp(req.x,req.y,req.z,req.v)
 
-        return MoveResponse("ready")
+        return RobotMoveResponse("ready")
 
     #Light
     def __lightCB(self,req):
@@ -62,12 +62,12 @@ class OneCtrlNode:
 
         elif req.light == req.OFF: self.__robot.light.off()
 
-        return LightResponse("ready")
+        return RobotLightResponse("ready")
 
     #ExtMotor
     def __extmotorCB(self,req):
         if self.__connected == False:
-            return ExtMotorResponse("failed")
+            return RobotExtMotorResponse("failed")
 
         if req.enable == True:
             if self.__motorstate == False:
@@ -78,19 +78,19 @@ class OneCtrlNode:
             self.__robot.extmotor.stop()
             self.__motorstate = False
 
-        return ExtMotorResponse("ready")
+        return RobotExtMotorResponse("ready")
 
     # Gripper
     def __gripperCB(self,req):
         if self.__connected == False:
-            return GripperResponse("failed")
+            return RobotGripperResponse("failed")
 
         if req.enable == True:
             self.__robot.gripper.close()
         else:
             self.__robot.gripper.open()
 
-        return GripperResponse("ready")
+        return RobotGripperResponse("ready")
 
     def run(self):
         rospy.init_node("one_ctrl_node")
