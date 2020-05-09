@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from one_easy_protocol_pkg.srv import *
+from one_easy_protocol_pkg.srv import Move,MoveResponse,Light,LightResponse,ExtMotor,ExtMotorResponse,Gripper,GripperResponse,Connect,ConnectResponse,Disonnect,DisconnectResponse
 from easyprotocol import *
 import rospy
 
@@ -12,7 +12,7 @@ class OneCtrlNode:
         self.__extmotor_srv = rospy.Service('extmotor', ExtMotor, self.__extmotor)
         self.__gripper_srv = rospy.Service('gripper', Gripper, self.__gripper)
         self.__connect_srv = rospy.Service('connect', Connect, self.__connect)
-        self.__disconnect_srv = rospy.Service('disconnect', Connect, self.__disconnect)
+        self.__disconnect_srv = rospy.Service('disconnect', Disconnect, self.__disconnect)
         self.__connected = False
         self.__motorstate = False
         self.__robot = EasyProtocol()
@@ -30,7 +30,7 @@ class OneCtrlNode:
     def __disconnect(self,req):
         self.__robot.stop()
         self.__connected = False
-        return ConnectResponse("disconnected")
+        return DisConnectResponse("disconnected")
 
     #Move
     def __move(self,req):
