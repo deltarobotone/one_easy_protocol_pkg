@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from one_easy_protocol_pkg.srv import Move,MoveResponse,Light,LightResponse,ExtMotor,ExtMotorResponse,Gripper,GripperResponse,Connect,ConnectResponse,Disonnect,DisconnectResponse
+from one_easy_protocol_pkg.srv import Move,MoveResponse,Light,LightResponse,ExtMotor,ExtMotorResponse,Gripper,GripperResponse,Connect,ConnectResponse,Disconnect,DisconnectResponse
 from easyprotocol import *
 import rospy
 
