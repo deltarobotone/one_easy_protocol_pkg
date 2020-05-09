@@ -44,7 +44,7 @@ class OneCtrlNode:
     #Light
     def __light(self,req):
         if self.__connected == False:
-            return RobotLightResponse("failed")
+            return LightResponse("failed")
 
         if req.light == req.RED: self.__robot.light.setColour(self.__colour.red,req.intensity)
 
@@ -83,7 +83,7 @@ class OneCtrlNode:
     # Gripper
     def __gripper(self,req):
         if self.__connected == False:
-            return RobotGripperResponse("failed")
+            return GripperResponse("failed")
 
         if req.enable == True:
             self.__robot.gripper.close()
