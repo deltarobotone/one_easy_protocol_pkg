@@ -24,22 +24,22 @@ class OneCtrlNode:
         self.__robot.findRobot()
         self.__robot.start()
         self.__connected = True
-        return RobotConnectResponse("connected")
+        return ConnectResponse("connected")
 
     #Disonnect
     def __disconnect(self,req):
         self.__robot.stop()
         self.__connected = False
-        return RobotConnectResponse("disconnected")
+        return ConnectResponse("disconnected")
 
     #Move
     def __move(self,req):
         if self.__connected == False:
-            return RobotMoveResponse("failed")
+            return MoveResponse("failed")
 
         self.__robot.move.ptp(req.x,req.y,req.z,req.v)
 
-        return RobotMoveResponse("ready")
+        return MoveResponse("ready")
 
     #Light
     def __light(self,req):
@@ -62,12 +62,12 @@ class OneCtrlNode:
 
         elif req.light == req.OFF: self.__robot.light.off()
 
-        return RobotLightResponse("ready")
+        return LightResponse("ready")
 
     #ExtMotor
     def __extmotor(self,req):
         if self.__connected == False:
-            return RobotExtMotorResponse("failed")
+            return ExtMotorResponse("failed")
 
         if req.enable == True:
             if self.__motorstate == False:
@@ -78,7 +78,7 @@ class OneCtrlNode:
             self.__robot.extmotor.stop()
             self.__motorstate = False
 
-        return RobotExtMotorResponse("ready")
+        return ExtMotorResponse("ready")
 
     # Gripper
     def __gripper(self,req):
@@ -90,7 +90,7 @@ class OneCtrlNode:
         else:
             self.__robot.gripper.open()
 
-        return RobotGripperResponse("ready")
+        return GripperResponse("ready")
 
     def run(self):
         rospy.init_node("one_ctrl_node")
