@@ -30,7 +30,7 @@ class OneCtrlNode:
     def __disconnectCB(self,req):
         self.__robot.stop()
         self.__connected = False
-        return RobotDisConnectResponse("disconnected")
+        return RobotDisconnectResponse("disconnected")
 
     #Move
     def __moveCB(self,req):
