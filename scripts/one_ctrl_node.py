@@ -7,12 +7,12 @@ import rospy
 class OneCtrlNode:
 
     def __init__(self):
-        self.__move_srv = rospy.Service('move', RobotMove, self.__moveCB)
-        self.__light_srv = rospy.Service('light', RobotLight, self.__lightCB)
-        self.__extmotor_srv = rospy.Service('extmotor', RobotExtMotor, self.__extmotorCB)
-        self.__gripper_srv = rospy.Service('gripper', RobotGripper, self.__gripperCB)
-        self.__connect_srv = rospy.Service('connect', RobotConnect, self.__connectCB)
-        self.__disconnect_srv = rospy.Service('disconnect', RobotDisconnect, self.__disconnectCB)
+        self.__move_srv = rospy.Service('ctrl_robot_move', RobotMove, self.__moveCB)
+        self.__light_srv = rospy.Service('ctrl_robot_light', RobotLight, self.__lightCB)
+        self.__extmotor_srv = rospy.Service('ctrl_robot_extmotor', RobotExtMotor, self.__extmotorCB)
+        self.__gripper_srv = rospy.Service('ctrl_robot_gripper', RobotGripper, self.__gripperCB)
+        self.__connect_srv = rospy.Service('ctrl_robot_connect', RobotConnect, self.__connectCB)
+        self.__disconnect_srv = rospy.Service('ctrl_robot_disconnect', RobotDisconnect, self.__disconnectCB)
         self.__connected = False
         self.__motorstate = False
         self.__robot = EasyProtocol()
