@@ -7,7 +7,7 @@ find_package(catkin REQUIRED COMPONENTS message_generation std_msgs rospy)
 
 catkin_python_setup()
 
-add_service_files(DIRECTORY srv FILES Move.srv Light.srv Gripper.srv ExtMotor.srv Connect.srv Disconnect.srv)
+add_service_files(DIRECTORY srv FILES RobotMove.srv RobotLight.srv RobotGripper.srv RobotExtMotor.srv RobotConnect.srv RobotDisconnect.srv)
 
 generate_messages(DEPENDENCIES std_msgs)
 
