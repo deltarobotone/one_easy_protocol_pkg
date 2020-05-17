@@ -44,7 +44,7 @@ class OneCtrlNode:
     #Light
     def __lightCB(self,req):
         if self.__connected == False:
-            return LightResponse("failed")
+            return RobotLightResponse("failed")
 
         if req.light == req.RED: self.__robot.light.setColour(self.__colour.red,req.intensity)
 
