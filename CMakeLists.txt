@@ -13,6 +13,6 @@ generate_messages(DEPENDENCIES std_msgs)
 
 catkin_package(CATKIN_DEPENDS std_msgs rospy)
 
-catkin_install_python(PROGRAMS scripts/one_ctrl_node.py
+catkin_install_python(PROGRAMS scripts/${PROJECT_NAME}/one_ctrl_node.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
