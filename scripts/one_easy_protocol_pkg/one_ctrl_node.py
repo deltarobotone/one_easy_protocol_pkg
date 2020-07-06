@@ -1,12 +1,24 @@
 #!/usr/bin/env python3
 
-from one_easy_protocol_pkg.srv import *
-from easyprotocol import *
+"""
+One Corntrol Node for ROS
+
+Node provides ROS services to control Delta-Robot One via One Easy Protocol
+"""
+
+from one_easy_protocol_pkg.srv import RobotMove,RobotMoveResponse
+from one_easy_protocol_pkg.srv import RobotLight,RobotLightResponse
+from one_easy_protocol_pkg.srv import RobotExtMotor,RobotExtMotorResponse
+from one_easy_protocol_pkg.srv import RobotGripper,RobotGripperResponse
+from one_easy_protocol_pkg.srv import RobotConnect,RobotConnectResponse
+from one_easy_protocol_pkg.srv import RobotDisconnect,RobotDisconnectResponse
+from easyprotocol import EasyProtocol,Colour
 import rospy
 
 class OneCtrlNode:
 
     def __init__(self):
+        """Class provides ROS node services to control Delta-Robot One via One Easy Protocol"""
         self.__move_srv = rospy.Service('ctrl_robot_move', RobotMove, self.__moveCB)
         self.__light_srv = rospy.Service('ctrl_robot_light', RobotLight, self.__lightCB)
         self.__extmotor_srv = rospy.Service('ctrl_robot_extmotor', RobotExtMotor, self.__extmotorCB)
@@ -47,19 +59,12 @@ class OneCtrlNode:
             return RobotLightResponse("failed")
 
         if req.light == req.RED: self.__robot.light.setColour(self.__colour.red,req.intensity)
-
         elif req.light == req.BLUE: self.__robot.light.setColour(self.__colour.blue,req.intensity)
-
         elif req.light == req.GREEN: self.__robot.light.setColour(self.__colour.green,req.intensity)
-
         elif req.light == req.YELLOW: self.__robot.light.setColour(self.__colour.yellow,req.intensity)
-
         elif req.light == req.MAGENTA: self.__robot.light.setColour(self.__colour.magenta,req.intensity)
-
         elif req.light == req.CYAN: self.__robot.light.setColour(self.__colour.cyan,req.intensity)
-
         elif req.light == req.WHITE: self.__robot.light.setColour(self.__colour.white,req.intensity)
-
         elif req.light == req.OFF: self.__robot.light.off()
 
         return RobotLightResponse("ready")
