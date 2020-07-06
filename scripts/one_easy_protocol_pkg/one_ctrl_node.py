@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-
 """
-One Corntrol Node for ROS
+One Control Node for ROS.
 
 Node provides ROS services to control Delta-Robot One via One Easy Protocol
 """
@@ -18,7 +17,7 @@ import rospy
 class OneCtrlNode:
 
     def __init__(self):
-        """Class provides ROS node services to control Delta-Robot One via One Easy Protocol"""
+        """Class provides ROS node services to control Delta-Robot One via One Easy Protocol."""
         self.__move_srv = rospy.Service('ctrl_robot_move', RobotMove, self.__moveCB)
         self.__light_srv = rospy.Service('ctrl_robot_light', RobotLight, self.__lightCB)
         self.__extmotor_srv = rospy.Service('ctrl_robot_extmotor', RobotExtMotor, self.__extmotorCB)
@@ -97,7 +96,8 @@ class OneCtrlNode:
 
         return RobotGripperResponse("ready")
 
-    def run(self):
+    @classmethod
+    def run(cls):
         rospy.init_node("one_ctrl_node")
         rate = rospy.Rate(10)
         while not rospy.is_shutdown():
