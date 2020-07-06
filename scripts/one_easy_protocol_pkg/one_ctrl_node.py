@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""
-One Control Node for ROS.
-
-Node provides ROS services to control Delta-Robot One via One Easy Protocol
-"""
+"""One Control Node for ROS."""
 
 from one_easy_protocol_pkg.srv import RobotMove,RobotMoveResponse
 from one_easy_protocol_pkg.srv import RobotLight,RobotLightResponse
@@ -29,7 +25,6 @@ class OneCtrlNode:
         self.__robot = EasyProtocol()
         self.__colour = Colour()
         return None
-    
     #Connect
     def __connectCB(self,req):
         self.__robot.findRobot()
