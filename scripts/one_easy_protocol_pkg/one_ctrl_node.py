@@ -14,11 +14,17 @@ class OneCtrlNode:
 
     def __init__(self):
         """Class provides ROS node services to control Delta-Robot One via One Easy Protocol."""
+        #Move robot to position x,y,z (mm) with a velocity v (0-100%).
         self.__move_srv = rospy.Service('ctrl_robot_move', RobotMove, self.__moveCB)
+        #Enable robot leds with given colours RED, GREEN, BLUE, YELLOW, MAGENTA, CYAN, WHITE for light and choose intensity (0-255). Disable via light -> OFF.
         self.__light_srv = rospy.Service('ctrl_robot_light', RobotLight, self.__lightCB)
+        #Enable or disable robot external motor control via enable and choose velocity via speed (0-255).
         self.__extmotor_srv = rospy.Service('ctrl_robot_extmotor', RobotExtMotor, self.__extmotorCB)
+        #Enable or disable robot gripper via enable.
         self.__gripper_srv = rospy.Service('ctrl_robot_gripper', RobotGripper, self.__gripperCB)
+        #Connect robot. This service uses one-easy-protocol find_robot() function to scan all ports for a connected robot. If a robot is available it will be connected.
         self.__connect_srv = rospy.Service('ctrl_robot_connect', RobotConnect, self.__connectCB)
+        #Disconnect robot.
         self.__disconnect_srv = rospy.Service('ctrl_robot_disconnect', RobotDisconnect, self.__disconnectCB)
         self.__connected = False
         self.__motorstate = False
