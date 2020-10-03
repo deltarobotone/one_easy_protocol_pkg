@@ -1,6 +1,7 @@
 # one_easy_protocol_pkg
 
 ROS package to control Delta-Robot One (one-easy-protocol bridge)
+
 ![CI](https://github.com/deltarobotone/one_easy_protocol_pkg/workflows/CI/badge.svg?branch=master) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/4401410029564e428891267ce456f202)](https://www.codacy.com/gh/deltarobotone/one_easy_protocol_pkg?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=deltarobotone/one_easy_protocol_pkg&amp;utm_campaign=Badge_Grade)
 
 ## Nodes
@@ -25,7 +26,7 @@ Enable or disable robot external motor control via enable and choose velocity vi
 
 ##### ctrl_robot_gripper (one_easy_protocol_pkg/RobotGripper)
 
-Enable or disable robot gripper via enable.
+Enable or disable robot gripper via enable argument.
 
 ##### ctrl_robot_light (one_easy_protocol_pkg/RobotLight)
 
@@ -33,5 +34,5 @@ Enable robot leds with given colours RED, GREEN, BLUE, YELLOW, MAGENTA, CYAN, WH
 
 ##### ctrl_robot_move (one_easy_protocol_pkg/RobotMove)
 
-Move robot to position x,y,z (mm) with a velocity v (0-100%).
+Move robot to position x,y,z (mm) with velocity v (0-100%).
 
